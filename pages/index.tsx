@@ -21,7 +21,9 @@ const Home: NextPage = () => {
           <span>Total</span>
           <span className="font-semibold">$10</span>
         </div>
-        <div className="mt-5 bg-blue-500 text-white p-3 text-center rounded-xl w-1/2 mx-auto">Checkout</div>
+        <div className="mt-5 bg-blue-500 text-white p-3 text-center rounded-xl w-1/2 mx-auto hover:bg-teal-500 hover:text-black active:bg-yellow-500 focus:bg-red-500">
+          Checkout
+        </div>
       </div>
       {/* Select Item End */}
       {/* Profile Start */}
@@ -62,10 +64,10 @@ const Home: NextPage = () => {
           <span className="font-medium text-xl">Swoon Lounge</span>
           <span className="text-xs text-gray-500">Chair</span>
           <div className="mt-3 mb-5 flex justify-between items-center">
-            <div>
-              <input type="radio" />
-              <input type="radio" />
-              <input type="radio" />
+            <div className="space-x-2">
+              <button className="w-5 h-5 rounded-full bg-yellow-500" />
+              <button className="w-5 h-5 rounded-full bg-indigo-500" />
+              <button className="w-5 h-5 rounded-full bg-teal-500" />
             </div>
             <div className="flex items-center space-x-5">
               <button className=" rounded-lg bg-blue-200 flex justify-center items-center aspect-square w-8 text-xl text-gray-500">
