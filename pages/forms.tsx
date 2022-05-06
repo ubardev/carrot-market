@@ -15,8 +15,12 @@ interface LoginForm {
 }
 
 export default function Forms() {
-  const { register, handleSubmit } = useForm<LoginForm>({
-    defaultValues: {},
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginForm>({
+    mode: 'onChange',
   });
   const onValid = (data: LoginForm) => {
     console.log('im vaild case');
@@ -24,6 +28,8 @@ export default function Forms() {
   const onInvalid = (errors: FieldErrors) => {
     console.log(errors);
   };
+
+  console.log('out:::::', errors);
 
   return (
     <form onSubmit={handleSubmit(onValid, onInvalid)}>
@@ -41,10 +47,15 @@ export default function Forms() {
       <input
         {...register('email', {
           required: 'Email is required',
+          validate: {
+            notGmail: (value) => !value.includes('@gmail.com') || 'Gmail is now allowed',
+          },
         })}
         type="email"
         placeholder="Email"
+        className={`${Boolean(errors.email?.message)} ? "border-red-500 : ""`}
       />
+      {errors.email?.message}
       <input
         {...register('password', {
           required: 'Password is required',
