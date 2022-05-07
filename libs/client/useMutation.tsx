@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 interface UseMutationState {
   loading: boolean;
@@ -22,9 +22,9 @@ export default function useMutation(url: string): UseMutationResult {
   function mutation(data: any) {
     setLoading(true);
     fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     })

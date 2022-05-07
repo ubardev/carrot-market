@@ -1,5 +1,5 @@
-import { join } from 'path';
-import { FieldErrors, useForm } from 'react-hook-form';
+import { join } from "path";
+import { FieldErrors, useForm } from "react-hook-form";
 
 // Less code (c)
 // Better validation
@@ -24,11 +24,11 @@ export default function Forms() {
     setError,
     setValue,
   } = useForm<LoginForm>({
-    mode: 'onChange',
+    mode: "onChange",
   });
   const onValid = (data: LoginForm) => {
-    console.log('im vaild case');
-    setError('username', { message: 'Taken username' });
+    console.log("im vaild case");
+    setError("username", { message: "Taken username" });
   };
   const onInvalid = (errors: FieldErrors) => {
     console.log(errors);
@@ -37,10 +37,10 @@ export default function Forms() {
   return (
     <form onSubmit={handleSubmit(onValid, onInvalid)}>
       <input
-        {...register('username', {
-          required: 'Username is required',
+        {...register("username", {
+          required: "Username is required",
           minLength: {
-            message: 'The username should be longer than 5 chars.',
+            message: "The username should be longer than 5 chars.",
             value: 5,
           },
         })}
@@ -49,10 +49,11 @@ export default function Forms() {
       />
       {errors.username?.message}
       <input
-        {...register('email', {
-          required: 'Email is required',
+        {...register("email", {
+          required: "Email is required",
           validate: {
-            notGmail: (value) => !value.includes('@gmail.com') || 'Gmail is now allowed',
+            notGmail: (value) =>
+              !value.includes("@gmail.com") || "Gmail is now allowed",
           },
         })}
         type="email"
@@ -61,8 +62,8 @@ export default function Forms() {
       />
       {errors.email?.message}
       <input
-        {...register('password', {
-          required: 'Password is required',
+        {...register("password", {
+          required: "Password is required",
         })}
         type="password"
         placeholder="Password"
