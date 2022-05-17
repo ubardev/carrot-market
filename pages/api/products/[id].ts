@@ -12,8 +12,23 @@ async function handler(
     where: { id: +id.toString() },
     include: { user: { select: { id: true, name: true, avatar: true } } },
   });
-  console.log(product);
-  res.json({ ok: true, product });
+  const terms = product?.name.split(" ").map((word) => ({
+    name: {
+      contains: word,
+    },
+  }));
+  const relatedProducts = await client.product.findMany({
+    where: {
+      OR: terms,
+      AND: {
+        id: {
+          not: product?.id,
+        },
+      },
+    },
+  });
+  console.log(relatedProducts);
+  res.json({ ok: true, product, relatedProducts });
 }
 
 export default withApiSession(withHandler({ methods: ["GET"], handler }));
