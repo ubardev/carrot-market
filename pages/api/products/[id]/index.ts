@@ -11,15 +11,18 @@ async function handler(
     query: { id },
     session: { user },
   } = req;
+
   const product = await client.product.findUnique({
     where: { id: +id.toString() },
     include: { user: { select: { id: true, name: true, avatar: true } } },
   });
+
   const terms = product?.name.split(" ").map((word) => ({
     name: {
       contains: word,
     },
   }));
+
   const relatedProducts = await client.product.findMany({
     where: {
       OR: terms,
@@ -30,6 +33,7 @@ async function handler(
       },
     },
   });
+
   const isLiked = Boolean(
     await client.fav.findFirst({
       where: {
