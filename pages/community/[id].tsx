@@ -33,6 +33,7 @@ const CommunityPostDetail: NextPage = () => {
   const { data, mutate } = useSWR<CommunityPostResponse>(
     router.query.id ? `/api/posts/${router.query.id}` : null
   );
+  console.log(data);
   const [wonder] = useMutation(`/api/posts/${router.query.id}/wonder`);
   const onWonderClick = () => {
     if (!data) return;
