@@ -14,7 +14,6 @@ export default function useCoords() {
   const onSuccess = ({
     coords: { latitude, longitude },
   }: GeolocationPosition) => {
-    console.log("coords??????", coords);
     setCoords({ latitude, longitude });
   };
 
