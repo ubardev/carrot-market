@@ -11,11 +11,13 @@ import dynamic from "next/dynamic";
 // const Bs = dynamic(() => import("@components/bs"), { ssr: false });
 
 const Bs = dynamic(
+  //@ts-ignore
   () =>
     new Promise((resolve) =>
       setTimeout(() => resolve(import("@components/bs")), 3000)
     ),
   { ssr: false, suspense: true }
+  // { ssr: false, suspense: true, loading: () => <span>loading</span> } react 18 suspense가능 사용 안할 경우 이렇게 셋팅
 );
 
 interface EnterForm {
