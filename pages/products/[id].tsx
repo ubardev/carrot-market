@@ -27,10 +27,10 @@ const ItemDetail: NextPage<ItemDetailResponse> = ({
   isLiked,
 }) => {
   const router = useRouter();
-  // const { mutate } = useSWRConfig();
-  // const { data, mutate: boundMutate } = useSWR<ItemDetailResponse>(
-  //   router.query.id ? `/api/products/${router.query.id}` : null
-  // );
+  const { mutate } = useSWRConfig();
+  const { data, mutate: boundMutate } = useSWR<ItemDetailResponse>(
+    router.query.id ? `/api/products/${router.query.id}` : null
+  );
   const [toggleFav] = useMutation(`/api/products/${router.query.id}/fav`);
   const onFavClick = () => {
     if (!data) return;
@@ -38,6 +38,14 @@ const ItemDetail: NextPage<ItemDetailResponse> = ({
     // mutate("/api/users/me", (prev: any) => ({ ok: !prev.ok }), false);
     toggleFav({});
   };
+
+  if (router.isFallback) {
+    return (
+      <Layout title="Loaidng for youuuuuuu">
+        <span>I love you</span>
+      </Layout>
+    );
+  }
 
   return (
     <Layout canGoBack seoTitle="Product Detail">
@@ -145,7 +153,7 @@ const ItemDetail: NextPage<ItemDetailResponse> = ({
 export const getStaticPaths: GetStaticPaths = () => {
   return {
     paths: [],
-    fallback: "blocking",
+    fallback: true,
   };
 };
 
