@@ -13,6 +13,7 @@ async function handler(
   } = req;
   if (req.method === "POST") {
     const stream = await client.stream.create({
+      //@ts-ignore
       data: {
         name,
         price,
